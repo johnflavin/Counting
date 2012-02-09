@@ -1,0 +1,40 @@
+State Counting
+John Flavin
+
+Finds all the valid occupation-number states of some FQH system on the torus or the sphere. 
+Compares the number of states found to the number expected from a counting formula.
+
+This is (hopefully) written generally enough to apply to any system, after moderate changes. 
+The example system is the nu=2/3 Gaffnian.
+
+NOTE: gaffcounting.py requires Python version 2.7 or later. I show example commands explicitly running with 'python2.7', but if your default version of Python is >=2.7, you can just run 'python' instead. If you want it to run on an earlier version, just change the argument parsing section in gaffcounting.py to a different implimentation.
+
+USAGE
+Enter at the prompt
+"python2.7 gaffcounting.py n N"
+where n and N are the integer values of the numbers of domain walls and particles, respectively.
+Both n and N must even or odd together.
+
+OPTIONAL FLAGS
+-h 				Help. Run "python2.7 gaffcounting.py -h" and a help message will be displayed.
+-s 				Sphere. By default, the program performs its tasks for the torus geometry. Set this flag to run for the sphere instead. 
+-v 				Verbose. In addition to the numbers from state counting and the formula, the program will print the strings of all the states and the numbers used to calculate the counting formula.
+-z				Debug mode. WARNING: This prints a huge number of lines. Statements will be printed throughout the recursion path describing the steps as they happen. Use this to gain familiarity with the algorithm by following a simple example or, as the name implies, use it to debug if you aren't seeing the results you expect.
+
+
+
+INCLUDED FILES
+gaffcounting.py	Main code execution.
+state.py		Contains the State class and the StateSolver class. StateSolver does all the work of finding the valid States.
+statemodel.py	Contains the StateModel base class, and the derived GaffnianTorus and GaffnianSphere classes.
+
+
+ADAPTATION TO A DIFFERENT STATE
+I wrote this code for the Gaffnian. If you want it to calculate different states, you'll need to change a few things.
+1. For each geometry, make derived classes from StateModel with all the information about what makes a valid state (has at most X particles in Y sites, etc.) stored in the appropriate variables, along with L, Fmax, and Fmin. Change the methods of pos_degen and internal_degen to calculate the position and internal degeneracy terms, respectively, from the counting formula. Change pos_degen_string and internal_degen_string to return nicely formatted strings of the above.
+2. In the main execution file (here named gaffcounting.py), call your classes (that you made in step 1.) instead of GaffnianTorus and GaffnianSphere.
+
+ADAPTATION TO A DIFFERENT GEOMETRY
+1. First, do step 1 above, deriving your class from StateModel.
+2. Do step 2 above, but add another flag for the parser to find and add an 'if' statement to catch that flag and make an instance of your class.
+3. Go into state.py and change the method State.proximate_indices (there is a comment to tell you where you need to make your changes). You need to tell it what to do if an array index goes "off the edge" in your geometry.
