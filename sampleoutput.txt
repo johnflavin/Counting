@@ -1,0 +1,25 @@
+$ python2.7 gaffcounting.py 3 3
+Number of states on torus: 20
+Number of states from torus formula: 20
+
+$ python2.7 gaffcounting.py 3 3 -v
+States on torus
+[001 002] [001 011] [001 101] [002 001] [010 011] [010 020] [010 101] [010 110] [011 001]
+[011 010] [020 010] [100 101] [100 110] [100 200] [101 001] [101 010] [101 100] [110 010]
+[110 100] [200 100]
+Number of states on torus: 20
+L = 6, Fmax = 3, Fmin = 1
+F = 3 states from torus formula:
+6/3*(3 choose 3)*3/3*(3 choose 3) = 2.0*1.0 = 2
+F = 1 states from torus formula:
+6/4*(4 choose 3)*3/2*(2 choose 1) = 6.0*3.0 = 18
+Number of states from torus formula: 20
+
+$ python2.7 gaffcounting.py 3 3 -v -s
+States on sphere
+[100 2] [101 1] [110 1] [200 1]
+Number of states on sphere: 4
+L = 4, Fmax = 1, Fmin = 1
+F = 1 states from sphere formula:
+(4 choose 3)*(1 choose 1) = 4*1 = 4
+Number of states from sphere formula: 4
